@@ -20,6 +20,9 @@ header h3{
 .word_page_rating {
     margin-top: 39px;
 }
+form {
+    margin-bottom: 20px;
+}
 /****************************************************************/
 .navbar-word .navbar-nav>.active>a,
 .navbar-word .navbar-nav>.active>a:focus,

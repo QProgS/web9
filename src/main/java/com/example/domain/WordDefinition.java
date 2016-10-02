@@ -16,7 +16,7 @@ public class WordDefinition {
     @JoinColumn(name = "word_id")
     private Word word;
 
-    @Column(name="text", length = 2000)
+    @Column(name="text", length = 3000)
     private String text;
 
     private String type;

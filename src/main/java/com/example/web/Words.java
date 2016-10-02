@@ -4,6 +4,8 @@ import com.example.domain.Word;
 import com.example.service.WordRepository;
 import com.example.utils.PageNav;
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 @Controller
 public class Words {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private WordRepository wordRepository;
@@ -43,19 +46,6 @@ public class Words {
         return "words";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(Model model, @RequestParam("query")String query, Pageable pageable) {
-        Page<Word> words = wordRepository.findByNameLike(query+"%",pageable);
-        PageNav<Word> wordsPage= new PageNav<>(words.getContent(),pageable,words.getTotalElements(),8);
-
-        model.addAttribute("words", wordsPage);
-        model.addAttribute("page", "search");
-        model.addAttribute("query", query);
-
-        return "search";
-    }
-
-
     @RequestMapping(value = "/word/{id}", method = RequestMethod.GET)
     public String word(@PathVariable Long id, Model model) {
         Word word = wordRepository.findOne(id);
@@ -66,5 +56,18 @@ public class Words {
         word.rating++;
         wordRepository.save(word);
         return "word";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String search(Model model, @RequestParam("query")String query, Pageable pageable) {
+        Page<Word> words = wordRepository.findByNameLike(
+                query.trim().toLowerCase()+"%",pageable);
+        PageNav<Word> wordsPage= new PageNav<>(words.getContent(),pageable,words.getTotalElements(),8);
+
+        model.addAttribute("words", wordsPage);
+        model.addAttribute("page", "search");
+        model.addAttribute("query", query);
+
+        return "search";
     }
 }
