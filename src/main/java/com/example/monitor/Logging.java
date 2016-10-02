@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class Logging {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(Logging.class);
 
     @Pointcut("execution(public * com.example.web.*.*(..))")
     public void monitor() {}
@@ -20,6 +20,11 @@ public class Logging {
     public Object profile(ProceedingJoinPoint pjp) {
         long start = System.currentTimeMillis();
         //logger.debug("JVM memory in use = "+ (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
+        StringBuilder args = new StringBuilder();
+        for(final Object argument : pjp.getArgs()){
+            args.append(argument); args.append(" ");
+        }
+
         Object output = null;
         try {
             output = pjp.proceed();
@@ -27,7 +32,7 @@ public class Logging {
             logger.error(e.getMessage(), e);
         }
         long elapsedTime = System.currentTimeMillis() - start;
-        logger.debug("Time: " + elapsedTime + " ms. " + pjp.getTarget()+"."+pjp.getSignature());
+        logger.debug("Time: " + elapsedTime + " ms. " + args.toString() + pjp.getTarget()+"."+pjp.getSignature() );
 
         return output;
     }

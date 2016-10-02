@@ -21,10 +21,13 @@ import java.util.ArrayList;
 
 @Controller
 public class Words {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private WordRepository wordRepository;
 
     @Autowired
-    private WordRepository wordRepository;
+    public Words(WordRepository wordRepository){
+        this.wordRepository = wordRepository;
+    }
 
     private static final String page = "words";
 
