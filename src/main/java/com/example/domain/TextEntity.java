@@ -1,6 +1,5 @@
 package com.example.domain;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -10,28 +9,13 @@ import java.util.List;
 public abstract class TextEntity extends BaseEntity{
 
     @ManyToMany
-    private List<Word> words;
+    public List<Word> words;
 
-    Date created;
-    Date lastModified;
-    long rating;
+    public Date created;
+    public Date lastModified;
+    public long rating;
 
     public String getText() {
         return "";
-    }
-    public Date getCreated() {
-        return created;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public List<Word> getWords() {
-        return words;
-    }
-
-    public long getRating() {
-        return rating;
     }
 }

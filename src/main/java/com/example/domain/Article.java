@@ -6,16 +6,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "topic")
-public class Topic extends TextEntity{
+public class Article extends TextEntity{
 
     @Column(name="text", length = 20000)
-    private String text;
+    public String text;
 
-    private String title;
+    @Column(name="text", length = 500)
+    public String title;
 
-    public Topic() {}
+    public Article() {}
 
-    public Topic(String text, String title) {
+    public Article(String text, String title) {
         this.text = text;
         this.title = title;
     }
