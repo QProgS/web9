@@ -16,11 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
 @Controller
 public class Words {
+    private static final String pagePath = "words";
 
     private WordRepository wordRepository;
 
@@ -29,48 +31,36 @@ public class Words {
         this.wordRepository = wordRepository;
     }
 
-    private static final String page = "words";
-
-//    @GetMapping("/")
-//    @ResponseBody
-//    @Transactional
-//    public String helloWorld() {
-//        //wordRepository.save(new Word("test", "tt", ""));
-//        return this.wordRepository.findAll().toString();
-//    }
 
     @RequestMapping(value = "/words", method = RequestMethod.GET)
-    public String helloWorld(Model model, Pageable pageable) {
-        Page<Word> words = wordRepository.findAll(pageable);
-        PageNav<Word> wordsPage= new PageNav<>(words.getContent(),pageable,words.getTotalElements(),8);
+    public ModelAndView showWords(Pageable pageable) {
 
-        model.addAttribute("words", wordsPage);
-        model.addAttribute("page", page);
-        return "words";
+        PageNav<Word> wordsPageNav = new PageNav<>(wordRepository.findAll(pageable), pageable, 8);
+
+        return new ModelAndView("words")
+                .addObject("words", wordsPageNav)
+                .addObject("pagePath", pagePath);
     }
 
     @RequestMapping(value = "/word/{id}", method = RequestMethod.GET)
-    public String word(@PathVariable Long id, Model model) {
+    public ModelAndView word(@PathVariable Long id, Model model) {
         Word word = wordRepository.findOne(id);
-        if(word == null) return "error";
-        model.addAttribute("word", word);
-        model.addAttribute("page", "word");
+        if(word == null) return new ModelAndView("error");
 
-        word.rating++;
-        wordRepository.save(word);
-        return "word";
+        return new ModelAndView("word")
+                .addObject("word", word)
+                .addObject("pagePath", "word");
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(Model model, @RequestParam("query")String query, Pageable pageable) {
-        Page<Word> words = wordRepository.findByNameLike(
-                query.trim().toLowerCase()+"%",pageable);
-        PageNav<Word> wordsPage= new PageNav<>(words.getContent(),pageable,words.getTotalElements(),8);
+    public ModelAndView search(@RequestParam(value = "query", defaultValue = "", required = false)String query,
+                               Pageable pageable) {
 
-        model.addAttribute("words", wordsPage);
-        model.addAttribute("page", "search");
-        model.addAttribute("query", query);
+        Page<Word> words = wordRepository.findByNameLike(query.trim().toLowerCase()+"%",pageable);
 
-        return "search";
+        return new ModelAndView("search")
+                .addObject("words", words)
+                .addObject("pagePath", "search")
+                .addObject("query", query);
     }
 }

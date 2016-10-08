@@ -10,8 +10,8 @@ import java.util.List;
 public class PageNav<T> extends PageImpl<T> {
     private List<Integer> pages = new ArrayList<>();
 
-    public PageNav(List<T> content, Pageable pageable, long total, int maxNavSize) {
-        super(content, pageable, total);
+    public PageNav(Page<T> page, Pageable pageable, int maxNavSize) {
+        super(page.getContent(), pageable, page.getTotalElements());
         //TODO do always maxNavSize
         int farDistance = maxNavSize/2;
         for (int i = Math.max(0,getNumber()-farDistance);

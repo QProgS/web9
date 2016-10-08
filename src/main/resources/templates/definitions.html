@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h1 th:text="${definitions.number} == 0 ? Definitions : 'Definitions - Page ' + ${definitions.number + 1}">Words</h1>
-
+                <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${definitions})"></div>
                 <table class="table">
                     <tr th:each="definition : ${definitions}">
                         <td>
@@ -32,7 +32,7 @@
                         </td>
                     </tr>
                 </table>
-
+                <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${definitions})"></div>
             </div>
             <div class="col-md-4">
                 <div class="aside" th:replace="fragments/main :: aside"></div>

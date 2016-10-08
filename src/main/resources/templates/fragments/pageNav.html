@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title th:text="${items.number} == 0 ? items : 'items - Page ' + ${items.number + 1}" >items</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Items</h1>
+            <div class="table-pagination" th:fragment="pagination(items)">
+                <ul class="pagination" th:if="${items.totalPages gt 1}">
+                    <li th:class="${items.number eq 0} ? 'disabled' : ''">
+                        <a th:if="${not items.first}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number-1},size=${items.size})}">Previous</a>
+                        <a th:if="${items.first}" href="javascript:void(0);">Previous</a>
+                    </li>
+
+                    <li th:each="pageNo : ${items.pages}" th:class="${items.number eq pageNo}? 'active' : ''">
+                        <a th:if="${items.number eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo + 1}">1</span>
+                        </a>
+                        <a th:if="${not (items.number eq pageNo)}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${pageNo},size=${items.size})}">
+                            <span th:text="${pageNo + 1}">2</span>
+                        </a>
+                    </li>
+                    <li th:class="${items.number + 1 ge items.totalPages} ? 'disabled' : ''">
+                        <a th:if="${not items.last}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number+1},size=${items.size})}">Next</a>
+                        <a th:if="${items.last}" href="javascript:void(0);">Next</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="aside" th:fragment="aside">
+                <br/><br/>
+                <div class="well">
+                    <h3>items</h3>
+                    <a href="">A</a> <a href="">B</a>
+                </div>
+                <div class="well">
+                    <h3>Sentences</h3>
+                    <ul class="nav">
+                        <li><a href="">Apple</a></li>
+                        <li><a href="">Color</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>

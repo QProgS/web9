@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h1 th:text="${words.number} == 0 ? Words : 'Words - Page ' + ${words.number + 1}">Words</h1>
-                <div class="table-pagination" th:replace="fragments/main :: pagination"></div>
+                <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${words})"></div>
                 <table class="table">
                     <tr th:each="word : ${words}">
                         <td class="clearfix">
@@ -33,7 +33,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="table-pagination" th:replace="fragments/main :: pagination"></div>
+                <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${words})"></div>
                 <p>Result count: <span th:text="${words.totalElements}">10</span></p>
                 <br/>
             </div>
