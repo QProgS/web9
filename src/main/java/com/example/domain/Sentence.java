@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "sentences")
-public class Sentences extends TextEntity{
+@Table(name = "sentence")
+public class Sentence extends TextEntity{
 
-    @Column(name="text", length = 1000)
+    @Column(name="text", length = 500)
     private String text;
 
-    public Sentences(){}
+    public Sentence(){}
 
-    public Sentences(String text) {
+    public Sentence(String text) {
         this.text = text;
     }
 

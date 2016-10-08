@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table(name = "topic")
 public class Topic extends TextEntity{
 
-    @Column(name="text", length = 1000)
+    @Column(name="text", length = 20000)
     private String text;
 
     private String title;

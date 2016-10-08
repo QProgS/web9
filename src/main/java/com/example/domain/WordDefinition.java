@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ public class WordDefinition extends TextEntity{
     @JoinColumn(name = "word_id")
     private Word word;
 
-    @Column(name="text", length = 1000)
+    @Column(name="text", length = 500)
     private String text;
 
     private String type;

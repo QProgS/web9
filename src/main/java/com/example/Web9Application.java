@@ -33,7 +33,7 @@ public class Web9Application {
 	}
 
 
-	@Component
+	//@Component
 	public class MyRunner implements CommandLineRunner {
 
 		@Override
@@ -41,10 +41,10 @@ public class Web9Application {
             int kol = 0;
             for (char i = 'A'; i <= 'Z'; i++) {
                 char filename = i;
-                try (BufferedReader br = new BufferedReader(new FileReader("K:\\Innk\\wordsProject\\Dictionary in csv\\" + filename + ".csv")))
+                try (BufferedReader br = new BufferedReader(new FileReader("F:\\Innk\\wordsProject\\Dictionary in csv\\" + filename + ".csv")))
                 {
                     String data;
-                    while ((data = br.readLine()) != null && kol<1000) {
+                    while ((data = br.readLine()) != null) {
                         data = data.replaceAll("'","''");
                         if(data.length()<2)continue;
                         int b =0, e = data.length();
@@ -69,8 +69,10 @@ public class Web9Application {
                             wordRepository.save(word);
                         }
                         Date date = new Date();
-                        WordDefinition wordDefinition = new WordDefinition(word,definition,type, date, date, 0);
-                        wordDefinitionRepository.save(wordDefinition);
+                        if(definition.length() < 450) {
+                            WordDefinition wordDefinition = new WordDefinition(word, definition, type, date, date, 0);
+                            wordDefinitionRepository.save(wordDefinition);
+                        }
                         kol++;
                     }
 

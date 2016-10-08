@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class Words {
@@ -63,4 +64,5 @@ public class Words {
                 .addObject("pagePath", "search")
                 .addObject("query", query);
     }
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Word extends BaseEntity {
 
     @Column(name = "name", unique = true, nullable = false)
-    private String name;
+    public String name;
 
     @OneToMany (mappedBy = "word")
     private List<WordDefinition> definitions;
