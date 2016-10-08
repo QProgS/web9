@@ -1,28 +1,20 @@
 package com.example.domain;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table (name = "word_definition")
-public class WordDefinition {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class WordDefinition extends TextEntity{
 
     @ManyToOne
     @JoinColumn(name = "word_id")
     private Word word;
 
-    @Column(name="text", length = 3000)
+    @Column(name="text", length = 1000)
     private String text;
 
     private String type;
-    private Date created;
-    private Date lastModified;
-    public long rating;
 
     public WordDefinition(){}
 
@@ -35,18 +27,7 @@ public class WordDefinition {
         this.rating = rating;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public long getId() {
-        return id;
-    }
-
+    @Override
     public String getText() {
         return text;
     }

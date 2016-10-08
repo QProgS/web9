@@ -6,17 +6,16 @@ import java.util.List;
 
 @Entity
 @Table (name = "word")
-public class Word {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class Word extends BaseEntity {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @OneToMany (mappedBy = "word")
     private List<WordDefinition> definitions;
+
+    @ManyToMany
+    private List<TextEntity> texts;
 
     public long rating;
 
@@ -26,10 +25,6 @@ public class Word {
         this.name = name.toLowerCase();
         definitions = new ArrayList<>();
         rating = 0;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
