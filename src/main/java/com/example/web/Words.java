@@ -43,14 +43,14 @@ public class Words {
                 .addObject("pagePath", pagePath);
     }
 
-    @RequestMapping(value = "/word/{id}", method = RequestMethod.GET)
-    public ModelAndView word(@PathVariable Long id, Model model) {
+    @RequestMapping(value = "/words/{id}", method = RequestMethod.GET)
+    public ModelAndView word(@PathVariable Long id) {
         Word word = wordRepository.findOne(id);
         if(word == null) return new ModelAndView("error");
 
         return new ModelAndView("word")
                 .addObject("word", word)
-                .addObject("pagePath", "word");
+                .addObject("pagePath", pagePath);
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)

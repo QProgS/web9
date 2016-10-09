@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Articles</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<header th:replace="fragments/main :: header"></header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Articles</h1>
+            <div class="row">
+                <div th:each="article : ${articles}" class="article">
+                    <h2 class="article-title">
+                        <a th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.title}"
+                           href="/templates/article.html" ></a>
+                    </h2>
+                    <div class="article-small_info"> <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}"></span></div>
+                    <div th:text="${article.content}" class="clearfix article-content">
+                        Content
+                    </div>
+
+                </div>
+            </div>
+            <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${articles})"></div>
+            <p>Result count: <span th:text="${articles.totalElements}">10</span></p>
+            <br/>
+        </div>
+        <div class="col-md-4">
+            <div class="aside" th:replace="fragments/main :: aside"></div>
+        </div>
+    </div>
+    <hr/>
+</div>
+
+<footer th:replace="fragments/main :: footer"></footer>
+</body>
+</html>

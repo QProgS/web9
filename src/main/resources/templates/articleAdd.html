@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Add article form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<header th:replace="fragments/main :: header"></header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Add article form</h1>
+            <form action="saveCustomer.html" th:action="@{/articles/add}" th:object="${article}" method="post">
+                <input type="hidden" th:field="*{id}" />
+
+                <label for="title">First name:</label>
+                <input type="text" th:field="*{title}" value="Title" /><br/>
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Title Error</span><br/>
+
+                <label for="content">Last name:</label>
+                <textarea type="text" th:field="*{content}" value="Content" ></textarea><br/>
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error"></span><br/>
+
+                <input type="submit" />
+            </form>
+            <span th:each="word : ${article.words}" class="">
+                <span th:text="${word.name}">span</span>
+            </span>
+        </div>
+        <div class="col-md-4">
+            <div class="aside" th:replace="fragments/main :: aside"></div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/main :: footer"></footer>
+</body>
+</html>
