@@ -99,4 +99,6 @@ footer {
     text-transform: capitalize;
 }
 /****************************************************************/
-
+.article-words{
+    margin: 0 0 60px;
+}

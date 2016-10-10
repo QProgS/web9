@@ -11,14 +11,14 @@ import javax.validation.constraints.Size;
 public class Article extends TextEntity{
 
     @NotNull
-    @Size(min=3, max=20000)
-    @Column(name="content", length = 20000)
-    public String content;
-
-    @NotNull
     @Size(min=3, max=500)
     @Column(name="title", length = 500)
     public String title;
+
+    @NotNull
+    @Size(min=3, max=20000)
+    @Column(name="content", length = 20000)
+    public String content;
 
     public Article() {}
 
@@ -46,6 +46,14 @@ public class Article extends TextEntity{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }
 

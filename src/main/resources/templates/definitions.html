@@ -21,7 +21,7 @@
                 <table class="table">
                     <tr th:each="definition : ${definitions}">
                         <td>
-                            <a th:href="@{/word/{id}(id=${definition.word.id})}" href="word.html">
+                            <a th:href="@{/words/{id}(id=${definition.word.id})}" href="word.html">
                                 <strong th:text="${definition.word.name}">word</strong>
                             </a>
                         </td>

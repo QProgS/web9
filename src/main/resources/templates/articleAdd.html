@@ -30,9 +30,11 @@
 
                 <input type="submit" />
             </form>
-            <span th:each="word : ${article.words}" class="">
-                <span th:text="${word.name}">span</span>
-            </span>
+            <div class="article-words">
+                <a th:each="word : ${article.words}" th:href="@{/words/{id}(id=${word.id})}" href="word.html">
+                    <span th:text="${word.name}">Name</span>
+                </a>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="aside" th:replace="fragments/main :: aside"></div>

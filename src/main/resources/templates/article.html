@@ -16,13 +16,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="pull-right word_page_rating" > <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}"></span></div>
+            <div class="pull-right word_page_rating" > <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}">5</span></div>
             <h1 th:text="${article.title}" class="word">Title</h1>
             <div th:text="${article.content}" class="page-content clearfix">Content</div>
             <hr/>
-            <span th:each="word : ${article.words}" class="">
-                <span th:text="${word.name}">span</span>
-            </span>
+            <div class="article-words">
+                <a th:each="word : ${article.words}" th:href="@{/words/{id}(id=${word.id})}" href="word.html">
+                    <span th:text="${word.name}">Name</span>
+                </a>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="aside" th:replace="fragments/main :: aside"></div>

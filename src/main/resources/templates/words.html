@@ -21,7 +21,7 @@
                 <table class="table">
                     <tr th:each="word : ${words}">
                         <td class="clearfix">
-                            <p><a th:href="@{/word/{id}(id=${word.id})}" href="word.html">
+                            <p><a th:href="@{/words/{id}(id=${word.id})}" href="word.html">
                                 <strong th:text="${word.name}">Name</strong>
                             </a></p>
                             <div class="small_add_info"> <span class="glyphicon glyphicon-star"></span> <span th:text="${word.rating}"></span></div>
