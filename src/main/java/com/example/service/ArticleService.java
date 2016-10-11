@@ -57,26 +57,35 @@ public class ArticleService {
     }
 
     public Article findOne(long id) {
-        Article article = articleRepository.findOne(id);        
+        Article article = articleRepository.findOne(id);
 
-        List<String> list = new ArrayList<>(Arrays.asList(article.content.split("\\s+")));
+        StringBuilder sbContent = new StringBuilder();
+        String lines[] = article.content.split("\\r?\\n");
 
-        StringBuilder sb = new StringBuilder();
+        for (String contentLine: lines) {
+            List<String> list = new ArrayList<>(Arrays.asList(contentLine.split("\\s+")));
+            StringBuilder sbLine = new StringBuilder();
 
-        for (String item : list){
-        	if(item.trim().length() == 0)continue;
-            long wordId = findItem(item,article.words);
-            if(wordId != -1) {
-                sb.append(processWord(wordId,item));
-            } else {
-                sb.append(item);
+            for (String item : list) {
+                if(item.equals("-")){sbLine.append("- ");continue;}
+
+                if (item.trim().length() == 0) continue;
+                long wordId = findItem(item, article.words);
+                if (wordId != -1) {
+                    sbLine.append(processWord(wordId, item));
+                } else {
+                    sbLine.append(item);
+                }
+                sbLine.append(' ');
             }
-            sb.append(' ');
+            sbContent.append(getLineContent(sbLine.toString()));
         }
 
-        article.setContent(sb.toString());
+        article.setContent(sbContent.toString());
         return article;
     }
+
+
 
     private long findItem(String item, Set<Word> words) {
     	List<String> wordForms = getWordForms(item);
@@ -115,4 +124,9 @@ public class ArticleService {
     private String processWord(long id, String name){
         return "<span data-id=\"" + id + "\">" + name + "</span>";
     }
+
+    private String getLineContent(String contentLine) {
+        return "<p>" + contentLine + "</p>";
+    }
+
 }

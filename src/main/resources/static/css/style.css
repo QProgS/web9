@@ -8,6 +8,9 @@ header h3{
     font-size: 40px;
 
 }
+h1 {
+    margin-bottom: 20px;
+}
 .searchbkgnd {
     height: auto;
     background: #373737;
@@ -114,10 +117,10 @@ footer {
 .article-words{
     margin: 0 0 60px;
 }
-.page-content span {
+.page-content span:hover {
     background: rgba(72, 172, 243, 0.71);
-    padding: 1px;
-    margin: 1px;
+    /* padding: 1px; */
+    /* margin: 1px; */
     border-radius: 2px;
     cursor: pointer;
 }
