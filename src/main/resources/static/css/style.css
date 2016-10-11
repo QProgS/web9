@@ -2,6 +2,7 @@ header {
     background: #1b50a0;
     position: relative;
     color: #ffffff;
+    margin-bottom: 15px;
 }
 header h3{
     font-size: 40px;
@@ -18,10 +19,13 @@ header h3{
     color: #ccc;
 }
 .word_page_rating {
-    margin-top: 39px;
+    margin-top: 20px;
 }
 form {
     margin-bottom: 20px;
+}
+.aside {
+    margin-top: 20px;
 }
 /****************************************************************/
 .navbar-word .navbar-nav>.active>a,
@@ -52,9 +56,11 @@ form {
 }
 /****************************************************************/
 h1 {
-    padding: 10px 0 0 0;
     font-size: 180%;
     font-weight: normal;
+}
+h2 {
+    font-size: 160%;
 }
 p:last-child{
     margin-bottom: 0;

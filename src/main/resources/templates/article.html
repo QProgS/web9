@@ -16,7 +16,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="pull-right word_page_rating" > <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}">5</span></div>
+            <div class="text-right word_page_rating pull-right" >
+                <span class="btn btn-xs">
+                    <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}">5</span>
+                </span>
+                <a th:href="@{/{pagePath}/edit/{id}(id=${article.id},pagePath=${pagePath})}" href="articleAdd.html"
+                    class="btn btn-xs btn-success">Edit</a>
+                <a th:href="@{/{pagePath}/remove/{id}(id=${article.id},pagePath=${pagePath})}" href="articles.html"
+                   class="btn btn-xs btn-danger">Delete</a>
+            </div>
             <h1 th:text="${article.title}" class="word">Title</h1>
             <div th:utext="${article.content}" class="page-content clearfix">
 

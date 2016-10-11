@@ -16,19 +16,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1>Add article form</h1>
+            <h1>Article form</h1>
             <form action="saveCustomer.html" th:action="@{/articles/add}" th:object="${article}" method="post">
                 <input type="hidden" th:field="*{id}" />
-
-                <label for="title">First name:</label>
-                <input type="text" th:field="*{title}" value="Title" /><br/>
-                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Title Error</span><br/>
-
-                <label for="content">Last name:</label>
-                <textarea type="text" th:field="*{content}" value="Content" ></textarea><br/>
-                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error"></span><br/>
-
-                <input type="submit" />
+                <div class="form-group">
+                    <label for="title">First name:</label>
+                    <input type="text" th:field="*{title}" value="Title" class="form-control" />
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Title Error</span>
+                </div>
+                <div class="form-group">
+                    <label for="content">Last name:</label>
+                    <textarea type="text" th:field="*{content}" value="Content" class="form-control" rows="10"></textarea>
+                    <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error"></span>
+                </div>
+                <input type="submit" class="btn btn-primary"/>
             </form>
             <div class="article-words">
                 <a th:each="word : ${article.words}" th:href="@{/words/{id}(id=${word.id})}" href="word.html">
