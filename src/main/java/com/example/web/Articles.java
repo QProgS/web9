@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/articles")
-@SessionAttributes({"articles"})
 public class Articles {
     private static final Logger logger = LoggerFactory.getLogger(Articles.class);
     private static final String pagePath = "articles";

@@ -93,20 +93,18 @@ public class ArticleService {
     private List<String> getWordForms(String name) {
         List<String> a = new ArrayList<>();
         name = name.toLowerCase();
-        //TODO        
-        //char marks[] = {'.', ',', ';', ':'};
-        //if(name.charAt(name.length()-1) )
-        if(name.endsWith("."))name = name.substring(0,name.length()-1);
-        if(name.endsWith(","))name = name.substring(0,name.length()-1);
-        if(name.endsWith(":"))name = name.substring(0,name.length()-1);
-        if(name.endsWith(";"))name = name.substring(0,name.length()-1);
+        //TODO stand-alone cases
+        if(name.startsWith("does")) {
+            a.add("does");
+            return a;
+        }
+        name = name.replaceAll("\\W","");
+
         a.add(name);
-        if(name.endsWith("s")) {
-            a.add(name.substring(0, name.length() - 1));
-        }
-        if(name.endsWith("ing")) {
-            a.add(name.substring(0, name.length() - 3));
-        }
+        if(name.endsWith("s")) a.add(name.substring(0, name.length() - 1));
+        if(name.endsWith("ing")) a.add(name.substring(0, name.length() - 3));
+        a.sort((x,y) -> Integer.compare(x.length(),y.length()) );
+
         return a;
     }
 
