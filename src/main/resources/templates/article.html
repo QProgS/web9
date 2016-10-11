@@ -17,7 +17,9 @@
     <div class="row">
         <div class="col-md-8">
             <div class="text-right word_page_rating pull-right" >
-                <span class="btn btn-xs">
+                <span th:text="${#calendars.format(article.created,'dd MMMM yyyy')}"
+                      class="date"></span>
+                <span class="small_add_info">
                     <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}">5</span>
                 </span>
                 <a th:href="@{/{pagePath}/edit/{id}(id=${article.id},pagePath=${pagePath})}" href="articleAdd.html"

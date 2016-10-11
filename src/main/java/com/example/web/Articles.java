@@ -8,7 +8,9 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,8 +34,15 @@ public class Articles {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showAll(Pageable pageable) {
+        Pageable pageable1 = new PageRequest(pageable.getPageNumber(),pageable.getPageSize(),
+                Sort.Direction.DESC, "created");
+        PageNav<Article> articlesPageNav = new PageNav<>(articleRepository.findAll(pageable1), pageable1, 8);
 
-        PageNav<Article> articlesPageNav = new PageNav<>(articleRepository.findAll(pageable), pageable, 8);
+        for(Article article : articlesPageNav.getContent()){
+            if(article.content.length() > 350){
+                article.content = article.content.substring(0,350) + "...";
+            }
+        }
 
         return new ModelAndView("articles")
                 .addObject("articles", articlesPageNav)

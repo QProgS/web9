@@ -15,7 +15,13 @@ header h3{
     border-top: 1px solid #fff;
 }
 .date, .small_add_info{
-    font-size: 0.85em;
+    vertical-align: middle;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    display: inline-block;
+}
+.date{
     color: #ccc;
 }
 .word_page_rating {
