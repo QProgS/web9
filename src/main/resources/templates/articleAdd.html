@@ -20,12 +20,12 @@
             <form action="saveCustomer.html" th:action="@{/articles/add}" th:object="${article}" method="post">
                 <input type="hidden" th:field="*{id}" />
                 <div class="form-group">
-                    <label for="title">First name:</label>
+                    <label for="title">Title:</label>
                     <input type="text" th:field="*{title}" value="Title" class="form-control" />
                     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Title Error</span>
                 </div>
                 <div class="form-group">
-                    <label for="content">Last name:</label>
+                    <label for="content">Content:</label>
                     <textarea type="text" th:field="*{content}" value="Content" class="form-control" rows="10"></textarea>
                     <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error"></span>
                 </div>

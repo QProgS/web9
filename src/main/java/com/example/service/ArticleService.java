@@ -28,12 +28,10 @@ public class ArticleService {
     }
 
     public Article save(Article article){
-        if(article.getId() == null){
-
-        }
         Date date = new Date();
-        article.created = date;
+        if(article.getId() == null)article.created = date;
         article.lastModified = date;
+
         article.words = new HashSet<>();
         Set<String> list = new HashSet<>(Arrays.asList(article.content.split("\\W+")));
         

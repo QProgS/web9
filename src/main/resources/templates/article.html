@@ -18,9 +18,9 @@
         <div class="col-md-8">
             <div class="text-right word_page_rating pull-right" >
                 <span th:text="${#calendars.format(article.created,'dd MMMM yyyy')}"
-                      class="date"></span>
+                      class="date">11 октября 2016</span>
                 <span class="small_add_info">
-                    <span class="glyphicon glyphicon-star"></span> <span th:text="${article.rating}">5</span>
+                    <span class="glyphicon glyphicon-star"></span> <span th:text="${#lists.size(article.words)}">5</span>
                 </span>
                 <a th:href="@{/{pagePath}/edit/{id}(id=${article.id},pagePath=${pagePath})}" href="articleAdd.html"
                     class="btn btn-xs btn-success">Edit</a>
@@ -29,7 +29,7 @@
             </div>
             <h1 th:text="${article.title}" class="word">Title</h1>
             <div th:utext="${article.content}" class="page-content clearfix">
-
+                Content text
             </div>
             <hr/>
             <div class="article-words">
