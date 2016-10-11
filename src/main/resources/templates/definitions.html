@@ -33,6 +33,7 @@
                     </tr>
                 </table>
                 <div class="table-pagination" th:replace="fragments/pageNav :: pagination(${definitions})"></div>
+                <p>Result count: <span th:text="${definitions.totalElements}">10</span></p>
             </div>
             <div class="col-md-4">
                 <div class="aside" th:replace="fragments/main :: aside"></div>

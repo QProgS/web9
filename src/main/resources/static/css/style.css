@@ -1,3 +1,6 @@
+body {
+    font-size: 16px;
+}
 header {
     background: #1b50a0;
     position: relative;
@@ -6,7 +9,6 @@ header {
 }
 header h3{
     font-size: 40px;
-
 }
 h1 {
     margin-bottom: 20px;
@@ -36,6 +38,9 @@ form {
 .aside {
     margin-top: 20px;
 }
+.pagination {
+     font-size: 0.875em;
+ }
 /****************************************************************/
 .navbar-word .navbar-nav>.active>a,
 .navbar-word .navbar-nav>.active>a:focus,
