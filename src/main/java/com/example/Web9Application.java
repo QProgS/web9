@@ -44,7 +44,7 @@ public class Web9Application {
             int kol = 0;
             for (char i = 'A'; i <= 'Z'; i++) {
                 char filename = i;
-                try (BufferedReader br = new BufferedReader(new FileReader("F:\\Innk\\wordsProject\\Dictionary in csv\\" + filename + ".csv")))
+                try (BufferedReader br = new BufferedReader(new FileReader("C:\\java\\Dictionary in csv\\" + filename + ".csv")))
                 {
                     String data;
                     while ((data = br.readLine()) != null) {

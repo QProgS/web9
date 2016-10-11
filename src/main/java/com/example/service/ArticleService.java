@@ -30,8 +30,13 @@ public class ArticleService {
         Set<String> list = new HashSet<>(Arrays.asList(article.content.split("\\W+")));
 
         logger.info(list + " split list.");
-        for (String aList : list) {
-            Word word = wordRepository.findByName(aList);
+        for (String item : list) {
+        	List<String> wordForms = getWordForms(item);
+        	Word word = null;
+        	for(String name : wordForms){
+        		word = wordRepository.findByName(name);
+        		if(word != null) break;
+        	}            
             if (word != null){
                 article.words.add(word);
             }
@@ -41,8 +46,7 @@ public class ArticleService {
     }
 
     public Article findOne(long id) {
-        Article article = articleRepository.findOne(id);
-        String s = article.getContent();
+        Article article = articleRepository.findOne(id);        
 
         List<String> list = new ArrayList<>(Arrays.asList(article.content.split("\\s")));
 
@@ -74,8 +78,8 @@ public class ArticleService {
 
     private List<String> getWordForms(String name) {
         List<String> a = new ArrayList<>();
-        //TODO
-        //name = name.toLowerCase();
+        name = name.toLowerCase();
+        //TODO        
         //char marks[] = {'.', ',', ';', ':'};
         //if(name.charAt(name.length()-1) )
         if(name.endsWith("."))name = name.substring(0,name.length()-1);
@@ -85,6 +89,9 @@ public class ArticleService {
         a.add(name);
         if(name.endsWith("s")) {
             a.add(name.substring(0, name.length() - 1));
+        }
+        if(name.endsWith("ing")) {
+            a.add(name.substring(0, name.length() - 3));
         }
         return a;
     }

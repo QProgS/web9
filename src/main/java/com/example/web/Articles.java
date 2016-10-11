@@ -51,7 +51,7 @@ public class Articles {
                 .addObject("pagePath", pagePath);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView add() {
         logger.debug("Received request to show add article");
 
@@ -59,7 +59,7 @@ public class Articles {
                 .addObject("article", new Article());
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Long id) {
         logger.debug("Received request to edit article");
 
