@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import com.example.utils.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -13,9 +15,11 @@ public class WordDefinition extends TextEntity{
     @JoinColumn(name = "word_id")
     private Word word;
 
+    @JsonView(Views.Public.class)
     @Column(name="text", length = 500)
     private String text;
 
+    @JsonView(Views.Public.class)
     private String type;
 
     public WordDefinition(){}
@@ -27,6 +31,10 @@ public class WordDefinition extends TextEntity{
         this.created = created;
         this.lastModified = lastModified;
         this.rating = rating;
+    }
+
+    public WordDefinition(Word word, String text, String type, Date date) {
+        this(word, text, type, date, date, 0);
     }
 
     @Override

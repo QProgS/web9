@@ -1,5 +1,8 @@
 package com.example.domain;
 
+import com.example.utils.Views;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +11,16 @@ import java.util.List;
 @Table (name = "word")
 public class Word extends BaseEntity {
 
+    @JsonView(Views.Public.class)
     @Column(name = "name", unique = true, nullable = false)
     public String name;
 
+    @JsonView(Views.Public.class)
     @OneToMany (mappedBy = "word")
-    private List<WordDefinition> definitions;
+    public List<WordDefinition> definitions;
 
     @ManyToMany
-    private List<TextEntity> texts;
+    public List<TextEntity> texts;
 
     public long rating;
 

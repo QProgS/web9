@@ -3,6 +3,8 @@ package com.example.web;
 import com.example.domain.Word;
 import com.example.service.WordRepository;
 import com.example.utils.PageNav;
+import com.example.utils.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class Words {
     private static final String pagePath = "words";
 
@@ -53,6 +55,12 @@ public class Words {
                 .addObject("pagePath", pagePath);
     }
 
+    @JsonView(Views.Public.class)
+    @RequestMapping(value="/words/json/{id}", method = RequestMethod.GET)
+    public @ResponseBody Word getWordInJSON(@PathVariable Long id) {
+        return wordRepository.findOne(id);
+    }
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(@RequestParam(value = "query", defaultValue = "", required = false)String query,
                                Pageable pageable) {
@@ -64,5 +72,6 @@ public class Words {
                 .addObject("pagePath", "search")
                 .addObject("query", query);
     }
+
 
 }
