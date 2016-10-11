@@ -8,10 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 @Component
@@ -28,7 +26,7 @@ public class ArticleService {
     }
 
     public Article save(Article article){
-        article.words = new ArrayList<>();
+        article.words = new HashSet<>();
         Set<String> list = new HashSet<>(Arrays.asList(article.content.split("\\W+")));
 
         logger.info(list + " split list.");
@@ -42,4 +40,56 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
+    public Article findOne(long id) {
+        Article article = articleRepository.findOne(id);
+        String s = article.getContent();
+
+        List<String> list = new ArrayList<>(Arrays.asList(article.content.split("\\s")));
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String item : list){
+            long wordId = findItem(item,article.words);
+            if(wordId != -1) {
+                sb.append(processWord(wordId,item));
+            } else {
+                sb.append(item);
+            }
+            sb.append(' ');
+        }
+
+        article.setContent(sb.toString());
+        return article;
+    }
+
+    private long findItem(String item, Set<Word> words) {
+        for (Word word : words){
+            List<String> wordForms = getWordForms(item);
+            if(wordForms.contains(word.name)){
+                return word.getId();
+            }
+        }
+        return -1;
+    }
+
+    private List<String> getWordForms(String name) {
+        List<String> a = new ArrayList<>();
+        //TODO
+        //name = name.toLowerCase();
+        //char marks[] = {'.', ',', ';', ':'};
+        //if(name.charAt(name.length()-1) )
+        if(name.endsWith("."))name = name.substring(0,name.length()-1);
+        if(name.endsWith(","))name = name.substring(0,name.length()-1);
+        if(name.endsWith(":"))name = name.substring(0,name.length()-1);
+        if(name.endsWith(";"))name = name.substring(0,name.length()-1);
+        a.add(name);
+        if(name.endsWith("s")) {
+            a.add(name.substring(0, name.length() - 1));
+        }
+        return a;
+    }
+
+    private String processWord(long id, String name){
+        return "<span data-id=\"" + id + "\">" + name + "</span>";
+    }
 }

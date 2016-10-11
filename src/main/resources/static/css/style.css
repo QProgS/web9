@@ -102,3 +102,13 @@ footer {
 .article-words{
     margin: 0 0 60px;
 }
+.page-content span {
+    background: rgba(72, 172, 243, 0.71);
+    padding: 1px;
+    margin: 1px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.page-content {
+    line-height: 1.6;
+}

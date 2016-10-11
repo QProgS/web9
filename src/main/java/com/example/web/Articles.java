@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/articles")
-@SessionAttributes({"article"})
+@SessionAttributes({"articles"})
 public class Articles {
     private static final Logger logger = LoggerFactory.getLogger(Articles.class);
     private static final String pagePath = "articles";
@@ -42,7 +43,7 @@ public class Articles {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView get(@PathVariable Long id) {
-        Article article = articleRepository.findOne(id);
+        Article article = articleService.findOne(id);
         if(article == null) return new ModelAndView("error");
 
         return new ModelAndView("article")
@@ -50,25 +51,42 @@ public class Articles {
                 .addObject("pagePath", pagePath);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView getAdd() {
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView add() {
         logger.debug("Received request to show add article");
 
         return new ModelAndView("articleAdd")
                 .addObject("article", new Article());
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable Long id) {
+        logger.debug("Received request to edit article");
+
+        return new ModelAndView("articleAdd")
+                .addObject("article", articleRepository.findOne(id));
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView add(@Valid Article article, BindingResult result){
         logger.info("add article: " + article.getTitle() + " "  + article.getContent());
 
-        ModelAndView modelAndView = new ModelAndView("articleAdd");
-        if(result.hasErrors())
-            modelAndView.addObject("article",article);
-        else
+        ModelAndView modelAndView = new ModelAndView("/add");
+        if(result.hasErrors()) {
+            modelAndView.addObject("article", article);
+        } else {
             articleService.save(article);
+            modelAndView.setViewName("redirect:/" + pagePath + "/" + article.getId());
+        }
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    public String remove(@PathVariable Long id) {
+        articleRepository.delete(id);
+
+        return "redirect:/" + pagePath;
     }
 
 }

@@ -25,22 +25,22 @@ import java.util.Date;
 @ComponentScan("com.example")
 public class Web9Application {
 
-	@Autowired
-	private WordRepository wordRepository;
+    @Autowired
+    private WordRepository wordRepository;
 
-	@Autowired
-	private WordDefinitionRepository wordDefinitionRepository;
+    @Autowired
+    private WordDefinitionRepository wordDefinitionRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(Web9Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Web9Application.class, args);
+    }
 
 
-	//@Component
-	public class MyRunner implements CommandLineRunner {
+    //@Component
+    public class MyRunner implements CommandLineRunner {
 
-		@Override
-		public void run(String... args) throws Exception {
+        @Override
+        public void run(String... args) throws Exception {
             int kol = 0;
             for (char i = 'A'; i <= 'Z'; i++) {
                 char filename = i;
@@ -86,8 +86,8 @@ public class Web9Application {
             }
             System.out.println("obj added: " + kol);
 
-		}
-	}
+        }
+    }
 }
 
 
