@@ -92,6 +92,7 @@ p:last-child{
 footer {
     border-top: 10px solid #005ea5;
     background-color: #dee0e2;
+    margin-top: 50px;
 }
 @media (min-width: 641px) {
     footer h2{

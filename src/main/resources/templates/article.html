@@ -31,12 +31,7 @@
             <div th:utext="${article.content}" class="page-content clearfix">
                 Content text
             </div>
-            <hr/>
-            <div class="article-words">
-                <a th:each="word : ${article.words}" th:href="@{/words/{id}(id=${word.id})}" href="word.html">
-                    <span th:text="${word.name}">Name</span>
-                </a>
-            </div>
+
         </div>
         <div class="col-md-4">
             <div class="aside" th:replace="fragments/main :: aside"></div>
