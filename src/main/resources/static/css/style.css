@@ -2,13 +2,17 @@ body {
     font-size: 16px;
 }
 header {
-    background: #1b50a0;
+    background: #becaa4;
+    background-image: url(http://imagesbase.ru/uploads/posts/2015-03/1425295511_imagesbase.ru-1550.jpg);
+    background-position: center 45%;
     position: relative;
     color: #ffffff;
     margin-bottom: 15px;
+    min-height: 190px;
 }
 header h3{
     font-size: 40px;
+    margin-top: 42px;
 }
 h1 {
     margin-bottom: 20px;
@@ -39,8 +43,8 @@ form {
     margin-top: 20px;
 }
 .pagination {
-     font-size: 0.875em;
- }
+    font-size: 0.875em;
+}
 /****************************************************************/
 .navbar-word .navbar-nav>.active>a,
 .navbar-word .navbar-nav>.active>a:focus,
@@ -95,7 +99,7 @@ p:last-child{
     margin-top: 0;
 }
 footer {
-    border-top: 10px solid #005ea5;
+    /* border-top: 10px solid #005ea5; */
     background-color: #dee0e2;
     margin-top: 50px;
 }
@@ -125,15 +129,17 @@ footer {
 }
 .page-content span {
     background: #fff;
-    -webkit-transition: all 0.1s ease-out;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
+    -webkit-transition: backgraund-color 0.1s ease-out;
+    -moz-transition: backgraund-color 0.1s ease-out;
+    -o-transition: backgraund-color 0.1s ease-out;
+    transition: backgraund-color 0.1s ease-out;
+    border-radius: 5px;
 }
 .page-content span:hover {
-    background: rgba(72, 172, 243, 0.71);
-    border-radius: 2px;
+    background: #bbe0ec;
     cursor: pointer;
+    margin: -2px -3px;
+    padding: 2px 3px;
 }
 .page-content {
     line-height: 1.6;

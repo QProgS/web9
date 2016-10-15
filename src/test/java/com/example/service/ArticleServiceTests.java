@@ -44,7 +44,7 @@ public class ArticleServiceTests {
     public void createArticle() throws Exception {
         Article article = new Article("A good practice when working with Spring", "Title");
         when(articleRepository.save(any(Article.class))).thenReturn(article);
-
+        //TODO
         assertEquals(words, articleService.save(article).words);
     }
 
@@ -54,7 +54,7 @@ public class ArticleServiceTests {
         original.words = words;
         when(articleRepository.findOne(0L)).thenReturn(original);
 
-        assertEquals("The <span data-id=\"0\">good</span>".trim(),
+        assertEquals("<p>The <span data-id=\"0\">good</span> </p>",
                 articleService.findOne(0L).content.trim());
     }
 
@@ -64,7 +64,7 @@ public class ArticleServiceTests {
         original.words = words;
         when(articleRepository.findOne(0L)).thenReturn(original);
 
-        assertEquals("The <span data-id=\"1\">practice.</span>".trim(),
+        assertEquals("<p>The <span data-id=\"1\">practice.</span> </p>",
                 articleService.findOne(0L).content.trim());
     }
 
@@ -74,7 +74,7 @@ public class ArticleServiceTests {
         original.words = new HashSet<>();
         when(articleRepository.findOne(0L)).thenReturn(original);
 
-        assertEquals("The good practice.".trim(),
+        assertEquals("<p>The good practice. </p>",
                 articleService.findOne(0L).content.trim());
     }
 

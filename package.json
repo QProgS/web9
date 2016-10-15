@@ -1,0 +1,24 @@
+{
+  "name": "web9",
+  "version": "1.0.0",
+  "description": "Articles with indexing words. Words have a definitions.\r 111732 words\r 175788 definitions",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QProgS/web9.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QProgS/web9/issues"
+  },
+  "homepage": "https://github.com/QProgS/web9#readme",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "riot": "^2.6.3"
+  }
+}

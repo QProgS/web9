@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${article.title}">Word</title>
+    <title th:text="${article.title}">Article</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../../../node_modules/riot/riot+compiler.min.js"></script>
+    <script src="tags/word-popup.tag" type="riot/tag"></script>
+    <script src="../static/js/word-popup.js" ></script>
 </head>
 <body>
 <header th:replace="fragments/main :: header"></header>
@@ -27,9 +28,14 @@
                 <a th:href="@{/{pagePath}/remove/{id}(id=${article.id},pagePath=${pagePath})}" href="articles.html"
                    class="btn btn-xs btn-danger">Delete</a>
             </div>
-            <h1 th:text="${article.title}" class="word">Title</h1>
-            <div th:utext="${article.content}" class="page-content clearfix">
-                Content text
+            <h1 th:text="${article.title}" class="word">Why do we need a new UI library?</h1>
+            <div class="page-content clearfix">
+                <div class="active-content" th:utext="${article.content}">
+                    <p>The frontend <span data-id="10">space</span> is <span data-id="21423">indeed</span> crowded, but we honestly feel the solution is still “out there”. We believe Riot offers the right balance for solving the great puzzle. While React seems to do it, they have serious weak points that Riot will solve.</p>
+                </div>
+                <div id="test-modal">
+                    <word-popup name="no set"></word-popup>
+                </div>
             </div>
 
         </div>
