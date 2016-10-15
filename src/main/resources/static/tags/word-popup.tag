@@ -1,14 +1,14 @@
 <word-popup>
     <h3>{word.name}</h3>
-    <ol if="{word.descriptions}" >
-        <li each="{word.descriptions}">{text}</li>
+    <ol if="{word.definitions}" >
+        <li each="{word.definitions}">{text}</li>
     </ol>
 
     <script>
         var self = this
 
         modalWord.on('setWord', function (word) {
-            //console.log(word);
+            console.log(word);
             self.word = word;
             self.update()
         })
