@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" />
-    <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../../../node_modules/riot/riot+compiler.min.js"></script>
-    <script src="tags/word-popup.tag" type="riot/tag"></script>
-    <script src="../static/js/word-popup.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/riot/2.6/riot+compiler.min.js" ></script>
+    <script src="../static/tags/word-popup.tag" th:src="@{/tags/word-popup.tag}" type="riot/tag"></script>
+    <script src="../static/js/word-popup.js" th:src="@{/js/word-popup.js}"></script>
 </head>
 <body>
 <header th:replace="fragments/main :: header"></header>
