@@ -5,7 +5,7 @@ function ModalWord() {
     var word = null;
 
     self.setWord = function(word) {
-        if(self.word != null) self.word.removeClass('active');
+        self.unsetWord();
         self.word = word;
         self.word.addClass('active');
         self.word.parent().addClass("word-selected");
@@ -42,7 +42,7 @@ function showWordPopup(word) {
     $('#word-popup__overlay').css("display", "block");
 
     $('#word-popup__block')
-        .css("top", word.offset().top - word.parent().offset().top + 19)
+        .css("top", word.offset().top - word.parents('.active-content').offset().top + 19)
         .css("position", "absolute")
         .css("width",     word.parent().width())
         .css("max-width", word.parent().width())
