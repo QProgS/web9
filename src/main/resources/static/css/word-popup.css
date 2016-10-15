@@ -1,0 +1,27 @@
+#word-popup__block ol{
+    font-size: 14px;
+}
+#word-popup__outer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#word-popup__overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    display: none;
+    /*background: rgba(0, 0, 0, 0.06);*/
+}
+#word-popup__block .popover-title {
+    font-size: 18px;
+    position: relative;
+    height: 36px;
+}
+#word-popup__block .popover-title span{
+    background-color: inherit;
+    position: absolute;
+}

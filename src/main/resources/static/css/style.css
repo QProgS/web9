@@ -134,8 +134,16 @@ footer {
     -o-transition: backgraund-color 0.1s ease-out;
     transition: backgraund-color 0.1s ease-out;
     border-radius: 5px;
+    position: relative;
+    z-index: 1055;
 }
-.page-content span:hover {
+.word-selected span{
+    background: #e2f5fa;
+    margin: -2px -3px;
+    padding: 2px 3px;
+}
+.active-content span:hover,
+.active-content span.active {
     background: #bbe0ec;
     cursor: pointer;
     margin: -2px -3px;
@@ -143,4 +151,5 @@ footer {
 }
 .page-content {
     line-height: 1.6;
+    position: relative;
 }
