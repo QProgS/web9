@@ -40,18 +40,18 @@ $(document).on("click", ".active-content span", function () {
 
 function showWordPopup(word) {
     $('#word-popup__overlay').css("display", "block");
-
-    $('#word-popup__block')
+    var block = $('#word-popup__block');
+    block
         .css("top", word.offset().top - word.parents('.active-content').offset().top + 19)
         .css("position", "absolute")
         .css("width",     word.parent().width())
         .css("max-width", word.parent().width())
         .css("display", "block");
 
-    $('#word-popup__block .arrow')
+    block.find('.arrow')
         .css("left", word.offset().left + word.width()/2.0 - word.parent().offset().left);
 
-    var title = $('#word-popup__block .popover-title span');
+    var title = block.find('.popover-title span');
     title.css("left", word.offset().left + word.width()/2.0  - word.parent().offset().left
         - title.width()/2.0);
 
