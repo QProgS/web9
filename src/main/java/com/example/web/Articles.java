@@ -36,7 +36,7 @@ public class Articles {
     public ModelAndView showAll(Pageable pageable) {
         Pageable pageable1 = new PageRequest(pageable.getPageNumber(),pageable.getPageSize(),
                 Sort.Direction.DESC, "created");
-        PageNav<Article> articlesPageNav = new PageNav<>(articleRepository.findAll(pageable1), pageable1, 8);
+        PageNav<Article> articlesPageNav = new PageNav<>(articleRepository.findAll(pageable1), pageable1, 7);
 
         for(Article article : articlesPageNav.getContent()){
             if(article.content.length() > 350){

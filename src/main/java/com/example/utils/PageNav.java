@@ -12,12 +12,23 @@ public class PageNav<T> extends PageImpl<T> {
 
     public PageNav(Page<T> page, Pageable pageable, int maxNavSize) {
         super(page.getContent(), pageable, page.getTotalElements());
-        //TODO do always maxNavSize
-        int farDistance = maxNavSize/2;
-        for (int i = Math.max(0,getNumber()-farDistance);
-             i < Math.min(getTotalPages(),getNumber()+farDistance); i++) {
+        int farDistance = (maxNavSize-1)/2;
+        int maxPage = getTotalPages()-1;
+        int addPage = 0;
+        if(maxNavSize % 2 == 0)addPage = 1;
+
+        int b = Math.max(0,getNumber()-farDistance);
+        int e = Math.min(maxPage,getNumber()+farDistance + addPage);
+
+
+        if(b == 0)e = Math.min(maxPage, maxNavSize-1);
+
+        if(e == maxPage)b = Math.max(0,maxPage-(maxNavSize-1));
+
+        for (int i = b; i <= e; i++) {
             pages.add(i);
         }
+
     }
     public PageNav(List<T> content, Pageable pageable, long total) {
         super(content, pageable, total);

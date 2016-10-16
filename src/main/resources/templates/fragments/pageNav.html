@@ -18,8 +18,12 @@
             <div class="table-pagination" th:fragment="pagination(items)">
                 <ul class="pagination" th:if="${items.totalPages gt 1}">
                     <li th:class="${items.number eq 0} ? 'disabled' : ''">
-                        <a th:if="${not items.first}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number-1},size=${items.size})}">Previous</a>
-                        <a th:if="${items.first}" href="javascript:void(0);">Previous</a>
+                        <a th:if="${not items.first}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${0},size=${items.size})}">First</a>
+                        <a th:if="${items.first}" href="javascript:void(0);">First</a>
+                    </li>
+                    <li th:class="${items.number eq 0} ? 'disabled' : ''">
+                        <a th:if="${not items.first}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number-1},size=${items.size})}">&lt;</a>
+                        <a th:if="${items.first}" href="javascript:void(0);">&lt;</a>
                     </li>
 
                     <li th:each="pageNo : ${items.pages}" th:class="${items.number eq pageNo}? 'active' : ''">
@@ -31,9 +35,14 @@
                         </a>
                     </li>
                     <li th:class="${items.number + 1 ge items.totalPages} ? 'disabled' : ''">
-                        <a th:if="${not items.last}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number+1},size=${items.size})}">Next</a>
-                        <a th:if="${items.last}" href="javascript:void(0);">Next</a>
+                        <a th:if="${not items.last}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.number+1},size=${items.size})}">&gt;</a>
+                        <a th:if="${items.last}" href="javascript:void(0);">&gt;</a>
                     </li>
+                    <li th:class="${items.number + 1 ge items.totalPages} ? 'disabled' : ''">
+                        <a th:if="${not items.last}" th:href="@{${'/{pagePath}'}(pagePath=${pagePath},page=${items.totalPages -1},size=${items.size})}">Last</a>
+                        <a th:if="${items.last}" href="javascript:void(0);">Last</a>
+                    </li>
+
                 </ul>
             </div>
 

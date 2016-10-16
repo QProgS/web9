@@ -29,7 +29,7 @@ public class WordDefinitions {
     @RequestMapping(value = "/definitions", method = RequestMethod.GET)
     public ModelAndView helloWorld(Model model, Pageable pageable) {
 
-        PageNav<WordDefinition> definitionsPageNav = new PageNav<>(wdRepository.findAll(pageable), pageable, 8);
+        PageNav<WordDefinition> definitionsPageNav = new PageNav<>(wdRepository.findAll(pageable), pageable, 7);
 
         return new ModelAndView("definitions")
                 .addObject("definitions", definitionsPageNav)
