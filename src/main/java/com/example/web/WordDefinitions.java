@@ -8,6 +8,7 @@ import com.example.utils.PageNav;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -27,7 +28,7 @@ public class WordDefinitions {
     }
 
     @RequestMapping(value = "/definitions", method = RequestMethod.GET)
-    public ModelAndView helloWorld(Model model, Pageable pageable) {
+    public ModelAndView showAll(Model model, @PageableDefault Pageable pageable) {
 
         PageNav<WordDefinition> definitionsPageNav = new PageNav<>(wdRepository.findAll(pageable), pageable, 7);
 

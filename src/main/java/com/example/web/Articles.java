@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,7 +34,7 @@ public class Articles {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showAll(Pageable pageable) {
+    public ModelAndView showAll( @PageableDefault(value = 5)Pageable pageable) {
         Pageable pageable1 = new PageRequest(pageable.getPageNumber(),pageable.getPageSize(),
                 Sort.Direction.DESC, "created");
         PageNav<Article> articlesPageNav = new PageNav<>(articleRepository.findAll(pageable1), pageable1, 7);

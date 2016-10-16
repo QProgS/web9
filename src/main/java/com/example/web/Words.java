@@ -36,7 +36,7 @@ public class Words {
 
 
     @RequestMapping(value = "/words", method = RequestMethod.GET)
-    public ModelAndView showWords(Pageable pageable) {
+    public ModelAndView showWords(@PageableDefault Pageable pageable) {
 
         PageNav<Word> wordsPageNav = new PageNav<>(wordRepository.findAll(pageable), pageable, 7);
 
