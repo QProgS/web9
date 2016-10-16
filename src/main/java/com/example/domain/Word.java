@@ -9,7 +9,11 @@ import java.util.List;
 
 @Entity
 @Table (name = "word")
-public class Word extends BaseEntity {
+public class Word {
+
+    @Id
+    @GeneratedValue
+    private long id;
 
     @JsonView(Views.Public.class)
     @Column(name = "name", unique = true, nullable = false)
@@ -38,6 +42,14 @@ public class Word extends BaseEntity {
 
     public List<WordDefinition> getDefinitions() {
         return definitions;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

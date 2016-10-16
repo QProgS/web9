@@ -22,9 +22,9 @@ public class Article extends TextEntity{
 
     public Article() {}
 
-    public Article(String content, String title) {
-        this.content = content;
+    public Article(String title, String content) {
         this.title = title;
+        this.content = content;
     }
 
     @Override

@@ -29,7 +29,9 @@ public class ArticleService {
 
     public Article save(Article article){
         Date date = new Date();
-        if(article.getId() == null)article.created = date;
+        //TODO
+        //if(article.getId() == null)
+        article.created = date;
         article.lastModified = date;
 
         article.words = new HashSet<>();

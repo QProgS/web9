@@ -1,9 +1,14 @@
 package com.example;
 
+import com.example.domain.Article;
 import com.example.domain.Word;
 import com.example.domain.WordDefinition;
+import com.example.service.ArticleService;
 import com.example.service.WordDefinitionRepository;
 import com.example.service.WordRepository;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,23 +23,28 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootApplication
 @ComponentScan("com.example")
 public class Web9Application {
 
-    @Autowired
-    private WordRepository wordRepository;
-
-    @Autowired
-    private WordDefinitionRepository wordDefinitionRepository;
-
     public static void main(String[] args) {
         SpringApplication.run(Web9Application.class, args);
     }
 
+    private WordRepository wordRepository;
+    private WordDefinitionRepository wordDefinitionRepository;
+    private ArticleService articleService;
+
+    @Autowired
+    public Web9Application(WordRepository wordRepository,
+                           WordDefinitionRepository wordDefinitionRepository,
+                           ArticleService articleService) {
+        this.wordRepository = wordRepository;
+        this.wordDefinitionRepository = wordDefinitionRepository;
+        this.articleService = articleService;
+    }
 
     //@Component
     public class MyRunner implements CommandLineRunner {
@@ -44,7 +54,7 @@ public class Web9Application {
             int kol = 0;
             for (char i = 'A'; i <= 'Z'; i++) {
                 char filename = i;
-                try (BufferedReader br = new BufferedReader(new FileReader("C:\\java\\Dictionary in csv\\" + filename + ".csv")))
+                try (BufferedReader br = new BufferedReader(new FileReader("C:\\java\\wordsProject\\Dictionary in csv\\" + filename + ".csv")))
                 {
                     String data;
                     while ((data = br.readLine()) != null) {
@@ -84,8 +94,25 @@ public class Web9Application {
                 }
                 System.out.println("filename: " + filename + " done.");
             }
+
             System.out.println("obj added: " + kol);
 
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+
+                Article[] articles = mapper.readValue(new File("C:\\java\\wordsProject\\articles.json"),
+                        Article[].class);
+                for(Article article : articles){
+                    articleService.save(article);
+                }
+
+            } catch (JsonGenerationException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
