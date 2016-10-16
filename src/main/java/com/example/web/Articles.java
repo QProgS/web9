@@ -12,11 +12,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @RequestMapping(value = "/articles")
@@ -53,7 +55,11 @@ public class Articles {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView get(@PathVariable Long id) {
         Article article = articleService.findOne(id);
-        if(article == null) return new ModelAndView("error");
+        if(article == null){
+            ModelAndView modelAndView = new ModelAndView("error");
+            modelAndView.setStatus(HttpStatus.NOT_FOUND);
+            return modelAndView;
+        }
 
         return new ModelAndView("article")
                 .addObject("article", article)

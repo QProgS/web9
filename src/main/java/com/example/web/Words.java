@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -46,9 +47,13 @@ public class Words {
     }
 
     @RequestMapping(value = "/words/{id}", method = RequestMethod.GET)
-    public ModelAndView word(@PathVariable Long id) {
+    public ModelAndView get(@PathVariable Long id) {
         Word word = wordRepository.findOne(id);
-        if(word == null) return new ModelAndView("error");
+        if(word == null){
+            ModelAndView modelAndView = new ModelAndView("error");
+            modelAndView.setStatus(HttpStatus.NOT_FOUND);
+            return modelAndView;
+        }
 
         return new ModelAndView("word")
                 .addObject("word", word)

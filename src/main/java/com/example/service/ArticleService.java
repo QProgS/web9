@@ -60,7 +60,7 @@ public class ArticleService {
 
     public Article findOne(long id) {
         Article article = articleRepository.findOne(id);
-
+        if(article == null) return null;
         StringBuilder sbContent = new StringBuilder();
         String lines[] = article.content.split("\\r?\\n");
 
