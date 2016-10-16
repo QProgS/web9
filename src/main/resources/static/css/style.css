@@ -120,14 +120,16 @@ footer {
 .search-results li {
     margin-bottom: 12px;
 }
-.word{
+.word-title{
     text-transform: capitalize;
 }
-/****************************************************************/
-.article-words{
+.page-content {
+    line-height: 1.6;
+    position: relative;
     margin: 0 0 60px;
 }
-.page-content span {
+/****************************************************************/
+.active-content span {
     background: #fff;
     -webkit-transition: backgraund-color 0.1s ease-out;
     -moz-transition: backgraund-color 0.1s ease-out;
@@ -137,19 +139,17 @@ footer {
     position: relative;
     z-index: 1055;
 }
-.word-selected span{
-    background: #e2f5fa;
-    margin: -2px -3px;
-    padding: 2px 3px;
-}
 .active-content span:hover,
 .active-content span.active {
     background: #bbe0ec;
     cursor: pointer;
     margin: -2px -3px;
     padding: 2px 3px;
+    z-index: 1056;
 }
-.page-content {
-    line-height: 1.6;
-    position: relative;
+.word-selected span{
+    background: #e2f5fa;
+    margin: -2px -3px;
+    padding: 2px 3px;
 }
+

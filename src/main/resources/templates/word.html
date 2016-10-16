@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="pull-right word_page_rating" > <span class="glyphicon glyphicon-star"></span> <span th:text="${word.rating}"></span></div>
-                <h1 th:text="${word.name}" class="word">Name</h1>
+                <h1 th:text="${word.name}" class="page-title word-title">Name</h1>
                 <div th:each="definition : ${word.definitions}" class="clearfix definition-row">
                     <p th:text="${definition.text}">span</p>
                     <span th:text="${#calendars.format(definition.lastModified,'dd MMMM yyyy')}"
